@@ -1,1 +1,1 @@
-# vue.js-Calculator
+# Calculator using vue.js
