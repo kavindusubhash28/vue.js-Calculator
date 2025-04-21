@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Vue.js Calculator</title>
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 50px;
+      background: #f0f2f5;
+    }
+    .calculator {
+      max-width: 300px;
+      margin: 0 auto;
+      background: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+    input, select, button {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      font-size: 16px;
+    }
+    .result {
+      font-weight: bold;
+      font-size: 20px;
+      margin-top: 15px;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <div id="app">
+    <div class="calculator">
+      <h2>Vue Calculator</h2>
+      <input type="number" v-model.number="num1" placeholder="Enter first number">
+      <input type="number" v-model.number="num2" placeholder="Enter second number">
+
+      <select v-model="operator">
+        <option value="+">Addition (+)</option>
+        <option value="-">Subtraction (-)</option>
+        <option value="*">Multiplication (*)</option>
+        <option value="/">Division (/)</option>
+      </select>
+
+      <button @click="calculate">Calculate</button>
+
+      <div class="result" v-if="result !== null">
+        Result: {{ result }}
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const { createApp, ref } = Vue;
+
+    createApp({
+      setup() {
+        const num1 = ref(0);
+        const num2 = ref(0);
+        const operator = ref('+');
+        const result = ref(null);
+
+        const calculate = () => {
+          switch(operator.value) {
+            case '+':
+              result.value = num1.value + num2.value;
+              break;
+            case '-':
+              result.value = num1.value - num2.value;
+              break;
+            case '*':
+              result.value = num1.value * num2.value;
+              break;
+            case '/':
+              result.value = num2.value !== 0 ? (num1.value / num2.value) : 'Cannot divide by 0';
+              break;
+          }
+        };
+
+        return { num1, num2, operator, result, calculate };
+      }
+    }).mount('#app');
+  </script>
+</body>
+</html>
