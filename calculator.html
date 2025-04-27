@@ -47,6 +47,8 @@
       <input type="number" v-model.number="num1" placeholder="Enter first number">
       <input type="number" v-model.number="num2" placeholder="Enter second number">
 
+      
+<!-- Dropdown to select operator -->
       <select v-model="operator">
         <option value="+">Addition (+)</option>
         <option value="-">Subtraction (-)</option>
@@ -54,15 +56,18 @@
         <option value="/">Division (/)</option>
       </select>
 
+      <!-- Buttons for Calculate and Clear -->
       <button @click="calculate">Calculate</button>
       <button @click="clear">Clear</button> <!-- New Clear Button -->
 
+      <!-- Result display -->
       <div class="result" v-if="result !== null">
         Result: {{ result }}
       </div>
     </div>
   </div>
 
+  <!-- Vue Application Script -->
   <script>
     const { createApp, ref } = Vue;
 
