@@ -3,7 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <title>Vue.js Calculator</title>
+
+  <!-- Load Vue 3 from CDN -->
   <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+
+  <!-- CSS Styling -->
   <style> 
     body {
       font-family: Arial, sans-serif;
@@ -47,6 +51,7 @@
       </select>
 
       <button @click="calculate">Calculate</button>
+      <button @click="clear">Clear</button> <!-- New Clear Button -->
 
       <div class="result" v-if="result !== null">
         Result: {{ result }}
@@ -81,7 +86,14 @@
           }
         };
 
-        return { num1, num2, operator, result, calculate };
+        const clear = () => {
+          num1.value = 0;
+          num2.value = 0;
+          operator.value = '+';
+          result.value = null;
+        };
+
+        return { num1, num2, operator, result, calculate, clear };
       }
     }).mount('#app');
   </script>
